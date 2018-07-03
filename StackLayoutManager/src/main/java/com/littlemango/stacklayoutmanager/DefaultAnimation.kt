@@ -64,20 +64,20 @@ class DefaultAnimation(scrollOrientation: ScrollOrientation, visibleCount: Int) 
         return mOutRotation
     }
 
-    override fun doAnimation(movePercent: Float, itemView: View, position: Int) {
+    override fun doAnimation(firstMovePercent: Float, itemView: View, position: Int) {
         val scale: Float
         var alpha = 1.0f
         val rotation: Float
         if (position == 0) {
-            scale = 1 - ((1 - mOutScale) * movePercent)
-            rotation = mOutRotation * movePercent
+            scale = 1 - ((1 - mOutScale) * firstMovePercent)
+            rotation = mOutRotation * firstMovePercent
         } else {
             val minScale = (Math.pow(mScale.toDouble(), position.toDouble())).toFloat()
             val maxScale = (Math.pow(mScale.toDouble(), (position - 1).toDouble())).toFloat()
-            scale = minScale + (maxScale - minScale) * movePercent
+            scale = minScale + (maxScale - minScale) * firstMovePercent
             //只对最后一个 item 做透明度变化
             if (position == mVisibleCount) {
-                alpha = movePercent
+                alpha = firstMovePercent
             }
             rotation = 0f
         }

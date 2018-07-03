@@ -35,7 +35,7 @@ class StackLayoutManager(scrollOrientation: ScrollOrientation,
     //触发翻页效果的最低 Fling速度
     private var mPagerFlingVelocity = 0
 
-    //标志当前滚动是否是调用{@link #scrollToCenter(Int, RecyclerView, Boolean)}之后触发的滚动
+    //标志当前滚动是否是调用scrollToCenter之后触发的滚动
     private var mFixScrolling = false
 
     //fling的方向，用来判断是前翻还是后翻
@@ -68,7 +68,7 @@ class StackLayoutManager(scrollOrientation: ScrollOrientation,
     /**
      *  设置是否为ViewPager 式翻页模式.
      *  <p>
-     *      当设置为 true 的时候，可以配合{@link #setPagerFlingVelocity(Int)} 设置触发翻页的最小速度.
+     *      当设置为 true 的时候，可以配合[StackLayoutManager.setPagerFlingVelocity]设置触发翻页的最小速度.
      *  @param isPagerMode 这个值默认是 false，当设置为 true 的时候，会有 viewPager 翻页效果.
      */
     fun setPagerMode(isPagerMode: Boolean) {
@@ -85,7 +85,7 @@ class StackLayoutManager(scrollOrientation: ScrollOrientation,
     /**
      * 设置触发ViewPager翻页效果的最小速度.
      * <p>
-     *     该值仅在 {@link #getPagerMode() == true}的时候有效.
+     *     该值仅在 [StackLayoutManager.getPagerMode] == true的时候有效.
      * @param velocity 默认值是2000.
      */
     fun setPagerFlingVelocity(@IntRange(from = 0, to = Int.MAX_VALUE.toLong()) velocity: Int) {
@@ -403,17 +403,8 @@ class StackLayoutManager(scrollOrientation: ScrollOrientation,
 
     private fun getFirstVisibleItemMovePercent(): Float {
         return when (mScrollOrientation) {
-            ScrollOrientation.RIGHT_TO_LEFT -> {
-                return if (width == 0) {
-                    0f
-                } else {
-                    (mScrollOffset % width) * 1.0f / width
-                }
-            }
+            ScrollOrientation.RIGHT_TO_LEFT -> (mScrollOffset % width) * 1.0f / width
             ScrollOrientation.LEFT_TO_RIGHT -> {
-                if (width == 0) {
-                    return 0f
-                }
                 val targetPercent = 1 - (mScrollOffset % width) * 1.0f / width
                 return if (targetPercent == 1f) {
                     0f
