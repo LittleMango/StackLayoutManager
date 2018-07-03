@@ -1,5 +1,6 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
+apply plugin: 'com.novoda.bintray-release'
 
 android {
     compileSdkVersion 27
@@ -8,7 +9,7 @@ android {
         minSdkVersion 14
         targetSdkVersion 27
         versionCode 1
-        versionName "1.0"
+        versionName "1.0.0"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
@@ -21,6 +22,9 @@ android {
         }
     }
 
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
+    }
 }
 
 dependencies {
@@ -34,4 +38,20 @@ dependencies {
 }
 repositories {
     mavenCentral()
+    tasks.withType(Javadoc) {
+        options{ encoding "UTF-8"
+            charSet 'UTF-8'
+            links "http://docs.oracle.com/javase/7/docs/api"
+        }
+    }
+}
+
+publish{
+    userOrg = 'jinliancheng120'
+    groupId = 'com.littlemango'
+    artifactId = 'stacklayoutmanager'
+    publishVersion = '1.0.0'
+    desc = 'A RecyclerView.LayoutManager implementation which provides functionality to show a group of stack view.'
+    website = 'https://github.com/LittleMango/StackLayoutManager'
+    licences = ['MIT']
 }
