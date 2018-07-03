@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="items">
+        <item> </item>
+        <item> </item>
+        <item>From Right To Left</item>
+        <item>From Left To Right</item>
+        <item>From Top To Bottom</item>
+        <item>From Bottom To Top</item>
+        <item>Change PageMode</item>
+        <item>Increase item offset</item>
+        <item>Decrease item offset</item>
+        <item>Increase visible itemCount</item>
+        <item>Decrease visible itemCount</item>
+        <item>Increase fling damp</item>
+        <item>Decrease fling damp</item>
+        <item>Use custom animation</item>
+    </string-array>
+</resources>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="items">
+        <item> </item>
+        <item> </item>
+        <item>卡片从左到右移出</item>
+        <item>卡片从右到左移出</item>
+        <item>卡片从上到下移出</item>
+        <item>卡片从下到上移出</item>
+        <item>改变PageMode</item>
+        <item>增加每个item之间的偏移</item>
+        <item>减少每个item之间的偏移</item>
+        <item>增加可见item的数量</item>
+        <item>减少可见item的数量</item>
+        <item>增加PageMode=true时的滑动阻尼</item>
+        <item>减少PageMode=true时的滑动阻尼</item>
+        <item>自定义动画</item>
+    </string-array>
+</resources>

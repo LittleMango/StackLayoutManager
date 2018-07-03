@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">StackLayoutManagerMaster</string>
+    <string name="smooth_scroll">带动画滚动到指定位置 </string>
+    <string name="scroll">不带动画滚动到指定位置 </string>
+</resources>

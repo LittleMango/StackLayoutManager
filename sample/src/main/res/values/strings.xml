@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">StackLayoutManagerMaster</string>
+    <string name="smooth_scroll">smoothScroll to </string>
+    <string name="scroll">scroll to </string>
+</resources>
