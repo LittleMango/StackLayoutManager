@@ -36,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mRecyclerView = findViewById(R.id.recycleView);
+
         mStackLayoutManager = new StackLayoutManager();
         mRecyclerView.setLayoutManager(mStackLayoutManager);
         mRecyclerView.setAdapter(new StackLayoutAdapter());

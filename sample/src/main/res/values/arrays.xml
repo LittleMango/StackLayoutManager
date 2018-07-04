@@ -3,8 +3,8 @@
     <string-array name="items">
         <item> </item>
         <item> </item>
-        <item>From Right To Left</item>
         <item>From Left To Right</item>
+        <item>From Right To Left</item>
         <item>From Top To Bottom</item>
         <item>From Bottom To Top</item>
         <item>Change PageMode</item>
