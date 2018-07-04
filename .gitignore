@@ -56,3 +56,6 @@ freeline_project_description.json
 .idea/vcs.xml
 .idea/caches/build_file_checksums.ser
 *.ser
+.DS_Store
+.DS_Store
+.idea/caches/build_file_checksums.ser
