@@ -5,11 +5,14 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.littlemango.stacklayoutmanager.StackLayoutManager;
 import com.littlemango.stacklayoutmanager.StackLayoutManager.ScrollOrientation;
@@ -114,6 +117,8 @@ public class MainActivity extends AppCompatActivity {
 
     class StackLayoutAdapter extends RecyclerView.Adapter<StackLayoutAdapter.StackHolder> {
 
+        Toast mToast = Toast.makeText(MainActivity.this, "", Toast.LENGTH_SHORT);
+
         @NonNull
         @Override
         public StackHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
@@ -123,7 +128,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         @Override
-        public void onBindViewHolder(@NonNull StackHolder stackHolder, int position) {
+        public void onBindViewHolder(@NonNull final StackHolder stackHolder, int position) {
             int res;
             switch (position % 6) {
                 case 0:
@@ -147,6 +152,17 @@ public class MainActivity extends AppCompatActivity {
             }
             stackHolder.imageView.setImageResource(res);
             stackHolder.textView.setText("" + position);
+            stackHolder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (stackHolder.getAdapterPosition() == mStackLayoutManager.getFirstVisibleItemPosition()) {
+                        mToast.setText("position: " + stackHolder.getAdapterPosition() + " is click!");
+                        mToast.show();
+                    } else {
+                        mRecyclerView.smoothScrollToPosition(stackHolder.getAdapterPosition());
+                    }
+                }
+            });
         }
 
         @Override
@@ -155,11 +171,13 @@ public class MainActivity extends AppCompatActivity {
         }
 
         class StackHolder extends RecyclerView.ViewHolder {
+            View itemView;
             ImageView imageView;
             TextView textView;
 
             StackHolder(@NonNull View itemView) {
                 super(itemView);
+                this.itemView = itemView;
                 imageView = itemView.findViewById(R.id.imageView);
                 textView = itemView.findViewById(R.id.textView);
             }
