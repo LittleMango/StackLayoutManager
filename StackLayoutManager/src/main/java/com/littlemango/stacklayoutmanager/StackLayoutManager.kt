@@ -160,12 +160,24 @@ class StackLayoutManager(scrollOrientation: ScrollOrientation,
         return mScrollOrientation
     }
 
+    /**
+     * 返回第一个可见 itemView 的位置.
+     * @return 返回第一个可见 itemView 的位置.
+     */
+    fun getFirstVisibleItemPosition(): Int {
+        return when(mScrollOrientation) {
+            ScrollOrientation.RIGHT_TO_LEFT -> Math.floor((mScrollOffset * 1.0 / width)).toInt()
+            ScrollOrientation.LEFT_TO_RIGHT -> itemCount - 1 - Math.ceil((mScrollOffset * 1.0 / width)).toInt()
+            ScrollOrientation.BOTTOM_TO_TOP -> Math.floor((mScrollOffset * 1.0 / height)).toInt()
+            ScrollOrientation.TOP_TO_BOTTOM -> itemCount - 1 - Math.ceil((mScrollOffset * 1.0 / height)).toInt()
+        }
+    }
+
     constructor(scrollOrientation: ScrollOrientation) : this(scrollOrientation, 3, DefaultAnimation::class.java, DefaultLayout::class.java)
 
     constructor(scrollOrientation: ScrollOrientation, visibleCount: Int) : this(scrollOrientation, visibleCount, DefaultAnimation::class.java, DefaultLayout::class.java)
 
     constructor() : this(ScrollOrientation.RIGHT_TO_LEFT)
-
 
     override fun generateDefaultLayoutParams(): RecyclerView.LayoutParams {
         return RecyclerView.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
@@ -380,15 +392,6 @@ class StackLayoutManager(scrollOrientation: ScrollOrientation,
             ScrollOrientation.LEFT_TO_RIGHT -> (itemCount - 1 - position) * width
             ScrollOrientation.BOTTOM_TO_TOP -> position * height
             ScrollOrientation.TOP_TO_BOTTOM -> (itemCount - 1 - position) * height
-        }
-    }
-
-    private fun getFirstVisibleItemPosition(): Int {
-        return when(mScrollOrientation) {
-            ScrollOrientation.RIGHT_TO_LEFT -> Math.floor((mScrollOffset * 1.0 / width)).toInt()
-            ScrollOrientation.LEFT_TO_RIGHT -> itemCount - 1 - Math.ceil((mScrollOffset * 1.0 / width)).toInt()
-            ScrollOrientation.BOTTOM_TO_TOP -> Math.floor((mScrollOffset * 1.0 / height)).toInt()
-            ScrollOrientation.TOP_TO_BOTTOM -> itemCount - 1 - Math.ceil((mScrollOffset * 1.0 / height)).toInt()
         }
     }
 
