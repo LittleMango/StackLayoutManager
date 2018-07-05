@@ -1,4 +1,4 @@
-# StackLayoutManager
+# StackLayoutManager [中文说明](README_CN.md)
 --------
 
 Android library that provides A RecyclerView.LayoutManager implementation which provides functionality to show a group of stack view.
