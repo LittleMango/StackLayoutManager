@@ -3,10 +3,12 @@
 
 Android library that provides A RecyclerView.LayoutManager implementation which provides functionality to show a group of stack view.
 
-Overview
---------
 ![IMG](gif/sample1.gif)
 ![IMG](gif/sample2.gif)
+
+Overview
+--------
+
 **StackLayoutManager** provides the following advantages:
 
 * **High performance**: the bottom layer use the recyclerView recycle mechanism to allow you to display a large number of itemviews without OOM.
@@ -105,6 +107,5 @@ You can clone or download this project to your computer and install **sample** a
 License
 -------
 MIT License
-See [MIT License][License] website.
+See [MIT License](LICENSE)
 
-[License]:          https://www.mit-license.org
