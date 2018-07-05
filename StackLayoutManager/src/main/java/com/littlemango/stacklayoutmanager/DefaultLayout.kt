@@ -2,7 +2,6 @@ package com.littlemango.stacklayoutmanager
 
 import android.view.View
 
-
 class DefaultLayout(scrollOrientation: StackLayoutManager.ScrollOrientation,
                     visibleCount: Int,
                     perItemOffset: Int) : StackLayout(scrollOrientation, visibleCount, perItemOffset) {
@@ -15,7 +14,6 @@ class DefaultLayout(scrollOrientation: StackLayoutManager.ScrollOrientation,
     private var mWidth = 0
     private var mHeight = 0
     private var mScrollOffset = 0
-
 
     override fun doLayout(stackLayoutManager: StackLayoutManager, scrollOffset: Int, firstMovePercent: Float, itemView: View, position: Int) {
         mWidth = stackLayoutManager.width
