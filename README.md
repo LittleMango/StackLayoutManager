@@ -92,8 +92,8 @@ manager.setPagerFlingVelocity(3000);
 mStackLayoutManager.setItemChangedListener(new StackLayoutManager.ItemChangedListener() {
     @Override
     public void onItemChanged(int position) {
-    mToast.setText("first visible item position is " + position);
-    mToast.show();
+        mToast.setText("first visible item position is " + position);
+        mToast.show();
     }
 });
 ```
