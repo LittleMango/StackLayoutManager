@@ -24,7 +24,7 @@ If you're using Gradle, you can declare this library as a dependency:
 
 ```groovy
 dependencies {
-    implementation 'com.littlemango:stacklayoutmanager:1.0.1'
+    implementation 'com.littlemango:stacklayoutmanager:1.0.2'
 }
 ```
 
@@ -87,12 +87,23 @@ manager.setPagerMode(true or false);
 manager.setPagerFlingVelocity(3000);
 ```
 
-7. I use the DefaultAnimation class to provide animation, which is inherited from StackAnimation, and you can inherit both classes to achieve the desired animation effect:
+7. You can add a item changed Listener to StackLayoutManager:
+```
+mStackLayoutManager.setItemChangedListener(new StackLayoutManager.ItemChangedListener() {
+    @Override
+    public void onItemChanged(int position) {
+    mToast.setText("first visible item position is " + position);
+    mToast.show();
+    }
+});
+```
+
+8. I use the DefaultAnimation class to provide animation, which is inherited from StackAnimation, and you can inherit both classes to achieve the desired animation effect:
 ```java
 DefaultAnimation animation = new DefaultAnimation(ScrollOrientation.BOTTOM_TO_TOP, visibleCount);
 manager.setAnimation(animation);
 ```
-8. I use the DefaultLayout class to implement the layout of items, which inherits from StackLayout. You can inherit both classes to achieve the layout effect you want：
+9. I use the DefaultLayout class to implement the layout of items, which inherits from StackLayout. You can inherit both classes to achieve the layout effect you want：
 ```java
 StackLayoutManager manager = new StackLayoutManager(ScrollOrientation.BOTTOM_TO_TOP, 
                 visibleCount,
