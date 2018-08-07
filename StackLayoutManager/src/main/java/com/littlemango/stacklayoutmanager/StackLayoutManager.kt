@@ -2,8 +2,7 @@ package com.littlemango.stacklayoutmanager
 
 import android.support.annotation.IntRange
 import android.support.v7.widget.RecyclerView
-import android.support.v7.widget.RecyclerView.SCROLL_STATE_DRAGGING
-import android.support.v7.widget.RecyclerView.SCROLL_STATE_IDLE
+import android.support.v7.widget.RecyclerView.*
 import android.view.View
 import android.view.ViewGroup
 
@@ -41,28 +40,17 @@ class StackLayoutManager(scrollOrientation: ScrollOrientation,
     //fling的方向，用来判断是前翻还是后翻
     private var mFlingOrientation = FlingOrientation.NONE
 
-    init {
-        mScrollOffset = when(mScrollOrientation) {
-            ScrollOrientation.RIGHT_TO_LEFT, ScrollOrientation.BOTTOM_TO_TOP -> 0
-            else -> Int.MAX_VALUE
-        }
+    //当前所处item对应的位置
+    private var itemPosition = 0
 
-        if (StackAnimation::class.java.isAssignableFrom(animation)) {
-            try {
-                val cla = animation.getDeclaredConstructor(ScrollOrientation::class.java, Int::class.javaPrimitiveType)
-                mAnimation = cla.newInstance(scrollOrientation, visibleCount) as StackAnimation
-            } catch (e: Exception) {
-                e.printStackTrace()
-            }
-        }
-        if (StackLayout::class.java.isAssignableFrom(layout)) {
-            try {
-                val cla = layout.getDeclaredConstructor(ScrollOrientation::class.java, Int::class.javaPrimitiveType, Int::class.javaPrimitiveType)
-                mLayout = cla.newInstance(scrollOrientation, visibleCount, 30) as StackLayout
-            } catch (e: Exception) {
-                e.printStackTrace()
-            }
-        }
+    //判断item位置是否发生了改变
+    private var isItemPositionChanged = false
+
+    //item 位置发生改变的回调
+    private var itemChangedListener: ItemChangedListener? = null
+
+    interface ItemChangedListener {
+        fun onItemChanged(position: Int)
     }
 
     /**
@@ -173,11 +161,42 @@ class StackLayoutManager(scrollOrientation: ScrollOrientation,
         }
     }
 
+    /**
+     * 设置 item 位置改变时触发的回调
+     */
+    fun setItemChangedListener(listener: ItemChangedListener) {
+        itemChangedListener = listener
+    }
+
     constructor(scrollOrientation: ScrollOrientation) : this(scrollOrientation, 3, DefaultAnimation::class.java, DefaultLayout::class.java)
 
     constructor(scrollOrientation: ScrollOrientation, visibleCount: Int) : this(scrollOrientation, visibleCount, DefaultAnimation::class.java, DefaultLayout::class.java)
 
     constructor() : this(ScrollOrientation.RIGHT_TO_LEFT)
+
+    init {
+        mScrollOffset = when(mScrollOrientation) {
+            ScrollOrientation.RIGHT_TO_LEFT, ScrollOrientation.BOTTOM_TO_TOP -> 0
+            else -> Int.MAX_VALUE
+        }
+
+        if (StackAnimation::class.java.isAssignableFrom(animation)) {
+            try {
+                val cla = animation.getDeclaredConstructor(ScrollOrientation::class.java, Int::class.javaPrimitiveType)
+                mAnimation = cla.newInstance(scrollOrientation, visibleCount) as StackAnimation
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
+        if (StackLayout::class.java.isAssignableFrom(layout)) {
+            try {
+                val cla = layout.getDeclaredConstructor(ScrollOrientation::class.java, Int::class.javaPrimitiveType, Int::class.javaPrimitiveType)
+                mLayout = cla.newInstance(scrollOrientation, visibleCount, 30) as StackLayout
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
+    }
 
     override fun generateDefaultLayoutParams(): RecyclerView.LayoutParams {
         return RecyclerView.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
@@ -211,7 +230,6 @@ class StackLayoutManager(scrollOrientation: ScrollOrientation,
                             }
                         }
                     }
-
                     calculateAndScrollToTarget(view)
                 }
                 return mPagerMode
@@ -293,6 +311,19 @@ class StackLayoutManager(scrollOrientation: ScrollOrientation,
         scrollToCenter(position, recyclerView, true)
     }
 
+    private fun updatePositionRecordAndNotify(position: Int) {
+        if (itemChangedListener == null) {
+            return
+        }
+        if (position != itemPosition) {
+            isItemPositionChanged = true
+            itemPosition = position
+            itemChangedListener?.onItemChanged(itemPosition)
+        } else {
+            isItemPositionChanged = false
+        }
+    }
+
     private fun handleScrollBy(offset: Int, recycler: RecyclerView.Recycler): Int {
         //期望值，不得超过最大最小值，所以期望值不一定等于实际值
         val expectOffset = mScrollOffset + offset
@@ -332,6 +363,9 @@ class StackLayoutManager(scrollOrientation: ScrollOrientation,
             //做动画
             mAnimation?.doAnimation(movePercent, view, i - firstVisiblePosition)
         }
+
+        //尝试更新当前item的位置并通知外界
+        updatePositionRecordAndNotify(firstVisiblePosition)
 
         //重用
         if (firstVisiblePosition - 1 >= 0) {

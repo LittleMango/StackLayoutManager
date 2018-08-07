@@ -31,10 +31,13 @@ public class MainActivity extends AppCompatActivity {
 
     private String[] selectItems;
 
+    private Toast mToast;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        mToast = Toast.makeText(MainActivity.this, "", Toast.LENGTH_SHORT);
         mRecyclerView = findViewById(R.id.recycleView);
 
         mStackLayoutManager = new StackLayoutManager();
@@ -114,11 +117,17 @@ public class MainActivity extends AppCompatActivity {
                         .show();
             }
         });
+
+        mStackLayoutManager.setItemChangedListener(new StackLayoutManager.ItemChangedListener() {
+            @Override
+            public void onItemChanged(int position) {
+                mToast.setText("first visible item position is " + position);
+                mToast.show();
+            }
+        });
     }
 
     class StackLayoutAdapter extends RecyclerView.Adapter<StackLayoutAdapter.StackHolder> {
-
-        Toast mToast = Toast.makeText(MainActivity.this, "", Toast.LENGTH_SHORT);
 
         @NonNull
         @Override
