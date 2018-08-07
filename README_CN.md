@@ -23,7 +23,7 @@ Gradle integration
 
 ```groovy
 dependencies {
-    implementation 'com.littlemango:stacklayoutmanager:1.0.1'
+    implementation 'com.littlemango:stacklayoutmanager:1.0.2'
 }
 ```
 
@@ -85,12 +85,23 @@ manager.setPagerMode(true or false);
 manager.setPagerFlingVelocity(3000);
 ```
 
-7. 如果你想自己实现动画效果，那么你可以继承自*StackAnimation*来定制动画效果，默认提供了[DefaultAnimation][DefaultAnimation]作为默认动画类:
+7. 为 StackLayoutManager 增加一个 item 位置变化时的回调：
+```
+mStackLayoutManager.setItemChangedListener(new StackLayoutManager.ItemChangedListener() {
+    @Override
+    public void onItemChanged(int position) {
+        mToast.setText("first visible item position is " + position);
+        mToast.show();
+    }
+});
+```
+
+8. 如果你想自己实现动画效果，那么你可以继承自*StackAnimation*来定制动画效果，默认提供了[DefaultAnimation][DefaultAnimation]作为默认动画类:
 ```java
 DefaultAnimation animation = new DefaultAnimation(ScrollOrientation.BOTTOM_TO_TOP, visibleCount);
 manager.setAnimation(animation);
 ```
-8. 如果你想自己实现布局效果，那么你可以继承自*StackLayout*来定制布局效果，默认提供了[DefaultLayout][DefaultLayout]作为默认布局类：
+9. 如果你想自己实现布局效果，那么你可以继承自*StackLayout*来定制布局效果，默认提供了[DefaultLayout][DefaultLayout]作为默认布局类：
 ```java
 StackLayoutManager manager = new StackLayoutManager(ScrollOrientation.BOTTOM_TO_TOP, 
                 visibleCount,
