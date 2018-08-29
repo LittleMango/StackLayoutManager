@@ -278,6 +278,10 @@ class StackLayoutManager(scrollOrientation: ScrollOrientation,
     }
 
     override fun onLayoutChildren(recycler: RecyclerView.Recycler, state: RecyclerView.State) {
+        if (itemCount == 0) {
+            return
+        }
+
         mLayout?.requestLayout()
 
         removeAndRecycleAllViews(recycler)
