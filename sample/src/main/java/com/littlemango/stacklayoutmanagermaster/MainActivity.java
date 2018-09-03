@@ -68,18 +68,22 @@ public class MainActivity extends AppCompatActivity {
                                     case 2:
                                         mStackLayoutManager = new StackLayoutManager(ScrollOrientation.LEFT_TO_RIGHT);
                                         mRecyclerView.setLayoutManager(mStackLayoutManager);
+                                        getSupportActionBar().setTitle("Picture 0");
                                         break;
                                     case 3:
                                         mStackLayoutManager = new StackLayoutManager(ScrollOrientation.RIGHT_TO_LEFT);
                                         mRecyclerView.setLayoutManager(mStackLayoutManager);
+                                        getSupportActionBar().setTitle("Picture 0");
                                         break;
                                     case 4:
                                         mStackLayoutManager = new StackLayoutManager(ScrollOrientation.TOP_TO_BOTTOM);
                                         mRecyclerView.setLayoutManager(mStackLayoutManager);
+                                        getSupportActionBar().setTitle("Picture 0");
                                         break;
                                     case 5:
                                         mStackLayoutManager = new StackLayoutManager(ScrollOrientation.BOTTOM_TO_TOP);
                                         mRecyclerView.setLayoutManager(mStackLayoutManager);
+                                        getSupportActionBar().setTitle("Picture 0");
                                         break;
                                     case 6:
                                         mStackLayoutManager.setPagerMode(!mStackLayoutManager.getPagerMode());
@@ -112,6 +116,13 @@ public class MainActivity extends AppCompatActivity {
                                         mStackLayoutManager.requestLayout();
                                         break;
                                 }
+
+                                mStackLayoutManager.setItemChangedListener(new StackLayoutManager.ItemChangedListener() {
+                                    @Override
+                                    public void onItemChanged(int position) {
+                                        getSupportActionBar().setTitle("Picture " + position);
+                                    }
+                                });
                             }
                         })
                         .show();
@@ -121,8 +132,7 @@ public class MainActivity extends AppCompatActivity {
         mStackLayoutManager.setItemChangedListener(new StackLayoutManager.ItemChangedListener() {
             @Override
             public void onItemChanged(int position) {
-                mToast.setText("first visible item position is " + position);
-                mToast.show();
+                getSupportActionBar().setTitle("Picture " + position);
             }
         });
     }
