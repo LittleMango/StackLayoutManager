@@ -114,7 +114,8 @@ StackLayoutManager manager = new StackLayoutManager(ScrollOrientation.BOTTOM_TO_
 Sample
 -------
 You can clone or download this project to your computer and install **sample** apk on your phone to see the effect.
-or you can scan QR code to install the apk:
+
+Or you can scan QR code to install the apk:
 
 ![IMG](sample.png)
 
