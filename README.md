@@ -24,7 +24,7 @@ If you're using Gradle, you can declare this library as a dependency:
 
 ```groovy
 dependencies {
-    implementation 'com.littlemango:stacklayoutmanager:1.0.3'
+    implementation 'com.littlemango:stacklayoutmanager:1.0.4'
 }
 ```
 
