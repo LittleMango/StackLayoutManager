@@ -8,12 +8,12 @@ import android.view.View
 import android.view.ViewGroup
 
 class StackLayoutManager(scrollOrientation: ScrollOrientation,
-                         visibleCount: Int,
-                         animation: Class<out StackAnimation>,
-                         layout: Class<out StackLayout>) : RecyclerView.LayoutManager() {
-    private enum class FlingOrientation { NONE, LEFT_TO_RIGHT, RIGHT_TO_LEFT, TOP_TO_BOTTOM, BOTTOM_TO_TOP }
+                          visibleCount: Int,
+                          animation: Class<out StackAnimation>,
+                          layout: Class<out StackLayout>) : RecyclerView.LayoutManager() {
+    private enum class FlingOrientation{NONE, LEFT_TO_RIGHT, RIGHT_TO_LEFT, TOP_TO_BOTTOM, BOTTOM_TO_TOP}
 
-    enum class ScrollOrientation { LEFT_TO_RIGHT, RIGHT_TO_LEFT, TOP_TO_BOTTOM, BOTTOM_TO_TOP }
+    enum class ScrollOrientation{LEFT_TO_RIGHT, RIGHT_TO_LEFT, TOP_TO_BOTTOM, BOTTOM_TO_TOP}
 
     private var mVisibleItemCount = visibleCount
 
@@ -92,7 +92,7 @@ class StackLayoutManager(scrollOrientation: ScrollOrientation,
      * 设置recyclerView 静止时候可见的itemView 个数.
      * @param count 可见 itemView，默认为3
      */
-    fun setVisibleItemCount(@IntRange(from = 1, to = Long.MAX_VALUE) count: Int) {
+    fun setVisibleItemCount(@IntRange(from = 1, to = Long.MAX_VALUE)count: Int) {
         mVisibleItemCount = Math.min(itemCount - 1, Math.max(1, count))
         mAnimation?.setVisibleCount(mVisibleItemCount)
     }
@@ -157,7 +157,7 @@ class StackLayoutManager(scrollOrientation: ScrollOrientation,
         if (width == 0 || height == 0) {
             return 0
         }
-        return when (mScrollOrientation) {
+        return when(mScrollOrientation) {
             ScrollOrientation.RIGHT_TO_LEFT -> Math.floor((mScrollOffset * 1.0 / width)).toInt()
             ScrollOrientation.LEFT_TO_RIGHT -> itemCount - 1 - Math.ceil((mScrollOffset * 1.0 / width)).toInt()
             ScrollOrientation.BOTTOM_TO_TOP -> Math.floor((mScrollOffset * 1.0 / height)).toInt()
@@ -179,7 +179,7 @@ class StackLayoutManager(scrollOrientation: ScrollOrientation,
     constructor() : this(ScrollOrientation.RIGHT_TO_LEFT)
 
     init {
-        mScrollOffset = when (mScrollOrientation) {
+        mScrollOffset = when(mScrollOrientation) {
             ScrollOrientation.RIGHT_TO_LEFT, ScrollOrientation.BOTTOM_TO_TOP -> 0
             else -> Int.MAX_VALUE
         }
@@ -212,7 +212,7 @@ class StackLayoutManager(scrollOrientation: ScrollOrientation,
         mOnFlingListener = object : RecyclerView.OnFlingListener() {
             override fun onFling(velocityX: Int, velocityY: Int): Boolean {
                 if (mPagerMode) {
-                    when (mScrollOrientation) {
+                    when(mScrollOrientation) {
                         ScrollOrientation.RIGHT_TO_LEFT, ScrollOrientation.LEFT_TO_RIGHT -> {
                             mFlingOrientation = when {
                                 velocityX > mPagerFlingVelocity -> FlingOrientation.RIGHT_TO_LEFT
@@ -268,35 +268,27 @@ class StackLayoutManager(scrollOrientation: ScrollOrientation,
     }
 
     override fun canScrollHorizontally(): Boolean {
-        if (itemCount == 0) {
-            return false
-        }
-        return when (mScrollOrientation) {
+        return when(mScrollOrientation) {
             ScrollOrientation.LEFT_TO_RIGHT, ScrollOrientation.RIGHT_TO_LEFT -> true
             else -> false
         }
     }
 
     override fun canScrollVertically(): Boolean {
-        if (itemCount == 0) {
-            return false
-        }
-        return when (mScrollOrientation) {
+        return when(mScrollOrientation) {
             ScrollOrientation.TOP_TO_BOTTOM, ScrollOrientation.BOTTOM_TO_TOP -> true
             else -> false
         }
     }
 
     override fun onLayoutChildren(recycler: RecyclerView.Recycler, state: RecyclerView.State) {
-
         mLayout?.requestLayout()
 
         removeAndRecycleAllViews(recycler)
 
-        if (itemCount > 0) {
-            mScrollOffset = getValidOffset(mScrollOffset)
-            loadItemView(recycler)
-        }
+        mScrollOffset = getValidOffset(mScrollOffset)
+
+        loadItemView(recycler)
     }
 
     override fun scrollHorizontallyBy(dx: Int, recycler: RecyclerView.Recycler, state: RecyclerView.State): Int {
@@ -407,7 +399,7 @@ class StackLayoutManager(scrollOrientation: ScrollOrientation,
 
     private fun scrollToCenter(targetPosition: Int, recyclerView: RecyclerView, animation: Boolean) {
         val targetOffset = getPositionOffset(targetPosition)
-        when (mScrollOrientation) {
+        when(mScrollOrientation) {
             ScrollOrientation.LEFT_TO_RIGHT, ScrollOrientation.RIGHT_TO_LEFT -> {
                 if (animation) {
                     recyclerView.smoothScrollBy(targetOffset - mScrollOffset, 0)
@@ -426,14 +418,14 @@ class StackLayoutManager(scrollOrientation: ScrollOrientation,
     }
 
     private fun getValidOffset(expectOffset: Int): Int {
-        return when (mScrollOrientation) {
+        return when(mScrollOrientation) {
             ScrollOrientation.RIGHT_TO_LEFT, ScrollOrientation.LEFT_TO_RIGHT -> Math.max(Math.min(width * (itemCount - 1), expectOffset), 0)
             else -> Math.max(Math.min(height * (itemCount - 1), expectOffset), 0)
         }
     }
 
     private fun getPositionOffset(position: Int): Int {
-        return when (mScrollOrientation) {
+        return when(mScrollOrientation) {
             ScrollOrientation.RIGHT_TO_LEFT -> position * width
             ScrollOrientation.LEFT_TO_RIGHT -> (itemCount - 1 - position) * width
             ScrollOrientation.BOTTOM_TO_TOP -> position * height
@@ -480,7 +472,7 @@ class StackLayoutManager(scrollOrientation: ScrollOrientation,
         //当是 Fling 触发的时候
         val triggerOrientation = mFlingOrientation
         mFlingOrientation = FlingOrientation.NONE
-        when (mScrollOrientation) {
+        when(mScrollOrientation) {
             ScrollOrientation.RIGHT_TO_LEFT -> {
                 if (triggerOrientation == FlingOrientation.RIGHT_TO_LEFT) {
                     return position + 1
