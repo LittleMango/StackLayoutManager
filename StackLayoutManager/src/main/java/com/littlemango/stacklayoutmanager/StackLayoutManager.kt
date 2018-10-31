@@ -268,27 +268,35 @@ class StackLayoutManager(scrollOrientation: ScrollOrientation,
     }
 
     override fun canScrollHorizontally(): Boolean {
-        return when(mScrollOrientation) {
+        if (itemCount == 0) {
+            return false
+        }
+        return when (mScrollOrientation) {
             ScrollOrientation.LEFT_TO_RIGHT, ScrollOrientation.RIGHT_TO_LEFT -> true
             else -> false
         }
     }
 
     override fun canScrollVertically(): Boolean {
-        return when(mScrollOrientation) {
+        if (itemCount == 0) {
+            return false
+        }
+        return when (mScrollOrientation) {
             ScrollOrientation.TOP_TO_BOTTOM, ScrollOrientation.BOTTOM_TO_TOP -> true
             else -> false
         }
     }
 
     override fun onLayoutChildren(recycler: RecyclerView.Recycler, state: RecyclerView.State) {
+
         mLayout?.requestLayout()
 
         removeAndRecycleAllViews(recycler)
 
-        mScrollOffset = getValidOffset(mScrollOffset)
-
-        loadItemView(recycler)
+        if (itemCount > 0) {
+            mScrollOffset = getValidOffset(mScrollOffset)
+            loadItemView(recycler)
+        }
     }
 
     override fun scrollHorizontallyBy(dx: Int, recycler: RecyclerView.Recycler, state: RecyclerView.State): Int {
