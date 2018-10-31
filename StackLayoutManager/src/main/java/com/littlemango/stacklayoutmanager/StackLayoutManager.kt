@@ -356,7 +356,7 @@ class StackLayoutManager(scrollOrientation: ScrollOrientation,
         //位移百分比
         val movePercent = getFirstVisibleItemMovePercent()
 
-        if(firstVisiblePosition<0){
+        if(firstVisiblePosition < 0){
             return
         }
 
