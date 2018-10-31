@@ -356,6 +356,10 @@ class StackLayoutManager(scrollOrientation: ScrollOrientation,
         //位移百分比
         val movePercent = getFirstVisibleItemMovePercent()
 
+        if(firstVisiblePosition<0){
+            return
+        }
+
         for (i in lastVisiblePosition downTo firstVisiblePosition) {
             val view = recycler.getViewForPosition(i)
             //添加到recycleView 中
