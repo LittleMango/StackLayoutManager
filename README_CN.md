@@ -23,7 +23,7 @@ Gradle integration
 
 ```groovy
 dependencies {
-    implementation 'com.littlemango:stacklayoutmanager:1.0.4'
+    implementation 'com.littlemango:stacklayoutmanager:1.0.5'
 }
 ```
 
