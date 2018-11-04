@@ -2,7 +2,8 @@ package com.littlemango.stacklayoutmanager
 
 import android.support.annotation.IntRange
 import android.support.v7.widget.RecyclerView
-import android.support.v7.widget.RecyclerView.*
+import android.support.v7.widget.RecyclerView.SCROLL_STATE_DRAGGING
+import android.support.v7.widget.RecyclerView.SCROLL_STATE_IDLE
 import android.view.View
 import android.view.ViewGroup
 
@@ -153,6 +154,9 @@ class StackLayoutManager(scrollOrientation: ScrollOrientation,
      * @return 返回第一个可见 itemView 的位置.
      */
     fun getFirstVisibleItemPosition(): Int {
+        if (width == 0 || height == 0) {
+            return 0
+        }
         return when(mScrollOrientation) {
             ScrollOrientation.RIGHT_TO_LEFT -> Math.floor((mScrollOffset * 1.0 / width)).toInt()
             ScrollOrientation.LEFT_TO_RIGHT -> itemCount - 1 - Math.ceil((mScrollOffset * 1.0 / width)).toInt()
@@ -447,6 +451,9 @@ class StackLayoutManager(scrollOrientation: ScrollOrientation,
     }
 
     private fun getFirstVisibleItemMovePercent(): Float {
+        if (width == 0 || height == 0) {
+            return 0f
+        }
         return when (mScrollOrientation) {
             ScrollOrientation.RIGHT_TO_LEFT -> (mScrollOffset % width) * 1.0f / width
             ScrollOrientation.LEFT_TO_RIGHT -> {
