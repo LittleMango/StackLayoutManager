@@ -63,7 +63,7 @@ class DefaultLayout(scrollOrientation: StackLayoutManager.ScrollOrientation,
         return when(mScrollOrientation) {
             StackLayoutManager.ScrollOrientation.BOTTOM_TO_TOP -> mStartMargin - mScrollOffset % mHeight
             StackLayoutManager.ScrollOrientation.TOP_TO_BOTTOM -> {
-                return if (mScrollOffset % mHeight == 0) {
+                return if (mHeight == 0 || mScrollOffset % mHeight == 0) {
                     mStartMargin
                 } else {
                     mStartMargin + (mHeight - mScrollOffset % mHeight)
