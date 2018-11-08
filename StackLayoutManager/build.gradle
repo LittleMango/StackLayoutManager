@@ -8,8 +8,8 @@ android {
     defaultConfig {
         minSdkVersion 14
         targetSdkVersion 27
-        versionCode 3
-        versionName "1.0.2"
+        versionCode 6
+        versionName "1.0.5"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
@@ -46,7 +46,7 @@ publish{
     userOrg = 'jinliancheng120'
     groupId = 'com.littlemango'
     artifactId = 'stacklayoutmanager'
-    publishVersion = '1.0.2'
+    publishVersion = '1.0.5'
     desc = 'A RecyclerView.LayoutManager implementation which provides functionality to show a group of stack view.'
     website = 'https://github.com/LittleMango/StackLayoutManager'
     licences = ['MIT']

@@ -24,7 +24,7 @@ If you're using Gradle, you can declare this library as a dependency:
 
 ```groovy
 dependencies {
-    implementation 'com.littlemango:stacklayoutmanager:1.0.2'
+    implementation 'com.littlemango:stacklayoutmanager:1.0.5'
 }
 ```
 
@@ -114,6 +114,10 @@ StackLayoutManager manager = new StackLayoutManager(ScrollOrientation.BOTTOM_TO_
 Sample
 -------
 You can clone or download this project to your computer and install **sample** apk on your phone to see the effect.
+
+Or you can scan QR code to install the apk:
+
+![IMG](sample.png)
 
 License
 -------

@@ -23,7 +23,7 @@ Gradle integration
 
 ```groovy
 dependencies {
-    implementation 'com.littlemango:stacklayoutmanager:1.0.2'
+    implementation 'com.littlemango:stacklayoutmanager:1.0.5'
 }
 ```
 
@@ -112,6 +112,10 @@ StackLayoutManager manager = new StackLayoutManager(ScrollOrientation.BOTTOM_TO_
 Sample
 -------
 你可以克隆或者下载该工程到电脑上，运行安装应用到手机上即可查看例子.
+
+或者，你可以扫码安装示例APK：
+
+![IMG](sample.png)
 
 License
 -------
