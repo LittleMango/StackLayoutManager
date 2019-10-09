@@ -1,6 +1,5 @@
 package com.littlemango.stacklayoutmanagermaster;
 
-import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 
 import com.littlemango.stacklayoutmanager.StackAnimation;

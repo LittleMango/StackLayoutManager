@@ -1,9 +1,9 @@
 package com.littlemango.stacklayoutmanager
 
-import android.support.annotation.IntRange
-import android.support.v7.widget.RecyclerView
-import android.support.v7.widget.RecyclerView.SCROLL_STATE_DRAGGING
-import android.support.v7.widget.RecyclerView.SCROLL_STATE_IDLE
+import androidx.annotation.IntRange
+import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView.SCROLL_STATE_DRAGGING
+import androidx.recyclerview.widget.RecyclerView.SCROLL_STATE_IDLE
 import android.view.View
 import android.view.ViewGroup
 
