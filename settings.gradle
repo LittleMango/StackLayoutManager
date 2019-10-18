@@ -1,1 +1,1 @@
-include ':sample', ':StackLayoutManager'
+include ':StackLayoutManager', ':sample'

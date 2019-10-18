@@ -3,11 +3,11 @@ apply plugin: 'kotlin-android'
 apply plugin: 'com.novoda.bintray-release'
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion 29
 
     defaultConfig {
         minSdkVersion 14
-        targetSdkVersion 28
+        targetSdkVersion 29
         versionCode 6
         versionName "1.0.5"
 
@@ -36,14 +36,15 @@ dependencies {
 repositories {
     mavenCentral()
     tasks.withType(Javadoc) {
-        options{ encoding "UTF-8"
+        options {
+            encoding "UTF-8"
             charSet 'UTF-8'
             links "http://docs.oracle.com/javase/7/docs/api"
         }
     }
 }
 
-publish{
+publish {
     userOrg = 'jinliancheng120'
     groupId = 'com.littlemango'
     artifactId = 'stacklayoutmanager'
