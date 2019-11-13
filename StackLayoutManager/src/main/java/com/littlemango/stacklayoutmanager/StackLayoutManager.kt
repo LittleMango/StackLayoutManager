@@ -6,6 +6,8 @@ import android.support.v7.widget.RecyclerView.SCROLL_STATE_DRAGGING
 import android.support.v7.widget.RecyclerView.SCROLL_STATE_IDLE
 import android.view.View
 import android.view.ViewGroup
+import kotlin.math.max
+import kotlin.math.min
 
 class StackLayoutManager(scrollOrientation: ScrollOrientation,
                           visibleCount: Int,
@@ -427,8 +429,8 @@ class StackLayoutManager(scrollOrientation: ScrollOrientation,
 
     private fun getValidOffset(expectOffset: Int): Int {
         return when(mScrollOrientation) {
-            ScrollOrientation.RIGHT_TO_LEFT, ScrollOrientation.LEFT_TO_RIGHT -> Math.max(Math.min(width * (itemCount - 1), expectOffset), 0)
-            else -> Math.max(Math.min(height * (itemCount - 1), expectOffset), 0)
+            ScrollOrientation.RIGHT_TO_LEFT, ScrollOrientation.LEFT_TO_RIGHT -> max(min(width * (itemCount - 1), expectOffset), 0)
+            else -> max(min(height * (itemCount - 1), expectOffset), 0)
         }
     }
 

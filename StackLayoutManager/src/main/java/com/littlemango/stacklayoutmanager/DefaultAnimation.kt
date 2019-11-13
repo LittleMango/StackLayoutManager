@@ -2,6 +2,7 @@ package com.littlemango.stacklayoutmanager
 
 import android.view.View
 import com.littlemango.stacklayoutmanager.StackLayoutManager.ScrollOrientation
+import kotlin.math.pow
 
 class DefaultAnimation(scrollOrientation: ScrollOrientation, visibleCount: Int) : StackAnimation(scrollOrientation, visibleCount) {
 
@@ -72,8 +73,8 @@ class DefaultAnimation(scrollOrientation: ScrollOrientation, visibleCount: Int) 
             scale = 1 - ((1 - mOutScale) * firstMovePercent)
             rotation = mOutRotation * firstMovePercent
         } else {
-            val minScale = (Math.pow(mScale.toDouble(), position.toDouble())).toFloat()
-            val maxScale = (Math.pow(mScale.toDouble(), (position - 1).toDouble())).toFloat()
+            val minScale = (mScale.toDouble().pow(position.toDouble())).toFloat()
+            val maxScale = (mScale.toDouble().pow((position - 1).toDouble())).toFloat()
             scale = minScale + (maxScale - minScale) * firstMovePercent
             //只对最后一个 item 做透明度变化
             if (position == mVisibleCount) {
