@@ -25,6 +25,8 @@ android {
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
     }
+
+    ndkVersion "20.0.5594570"
 }
 
 dependencies {
