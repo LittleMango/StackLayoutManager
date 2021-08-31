@@ -2,11 +2,11 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 
 android {
-    compileSdkVersion 29
+    compileSdkVersion 30
 
     defaultConfig {
         minSdkVersion 14
-        targetSdkVersion 29
+        targetSdkVersion 30
         versionCode 6
         versionName "1.0.5"
 
@@ -56,13 +56,3 @@ repositories {
         }
     }
 }
-
-//publish {
-//    userOrg = 'jinliancheng120'
-//    groupId = 'com.littlemango'
-//    artifactId = 'stacklayoutmanager'
-//    publishVersion = '1.0.5'
-//    desc = 'A RecyclerView.LayoutManager implementation which provides functionality to show a group of stack view.'
-//    website = 'https://github.com/LittleMango/StackLayoutManager'
-//    licences = ['MIT']
-//}
